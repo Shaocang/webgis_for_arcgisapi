@@ -18,6 +18,7 @@
           </el-menu>
         </el-aside>
         <el-main>
+          <map-view/>
         </el-main>
       </el-container>
     </el-container>
@@ -25,8 +26,14 @@
 </template>
 
 <script>
+import MapView from 'views/MapView.vue'
+
+
 export default {
-  name: 'PageLayout'
+  name: 'PageLayout',
+  components: {
+    MapView
+  }
 }
 </script>
 
@@ -66,6 +73,10 @@ export default {
 
   .el-menu-item i:hover::before {
     color: yellow;
+  }
+
+  .el-main {
+    padding: 0 !important;
   }
 
 
