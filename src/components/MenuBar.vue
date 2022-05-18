@@ -6,7 +6,7 @@
         title="Add Layer"
         trigger="hover">
         <el-button slot="reference">
-          <img :src="require('assets/image/mapwidget/layer.svg')" alt="layer" />
+          <img :src="require('assets/image/mapwidget/layer.svg')" alt="layer"  />
         </el-button>
       </el-popover>
     </div>
@@ -62,7 +62,7 @@ export default {
 <style>
   .menu-bar {
     position: absolute;
-    left: 80px;
+    right: 80px;
     top: 200px;
     display: flex;
     flex-flow: column nowrap;
