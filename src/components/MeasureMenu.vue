@@ -1,6 +1,6 @@
 <template>
-  <div class="measure-menu">
-    <el-dropdown @command="handleCommand">
+  <div class="measureDiv">
+    <el-dropdown trigger="click" @command="handleCommand">
       <span class="el-dropdown-link">
         测量菜单<i class="el-icon-arrow-down el-icon--right"></i>
       </span>
@@ -14,82 +14,45 @@
 
 <script>
 import {loadModules} from 'esri-loader'
-
-const options = {
-  version: '4.23',
-  css: true
-}  
+import config from './config';
 
 export default {
   name: 'MeasureMenu',
   methods: {
     handleCommand(command) {
-      console.log(command);
-      this.distanceMeasure()
+      if (command === 'a') {
+        this.test()
+      }
     },
-    async distanceMeasure() {
-      console.log(111);
-      const [GraphicsLayer] = await loadModules([
-        'esri/layers/GraphicsLayer',
-      ], options)
-
-      const sketchLayer = new GraphicsLayer()
-      const view = this.$store.state.defaultView
-      view.map.add(sketchLayer)
-      // const url = 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/Utilities/Geometry/GeometryServer'
-      
-      const polylineSymbol = {
-        type: 'simple-line',
-        color: 'white',
-        style: 'solid',
-        width: 3
-      }
-
-      const polygonSymbol = {
-        type: 'simple-fill',
-        color: 'white',
-        outline: {
-          color: 'blue',
-          width: 1
-        }
-      }
-
+    async test() {
+      const [Legend, SketchViewModel, GraphicsLayer] = await loadModules(['esri/widgets/Legend',
+      'esri/widgets/Sketch/SketchViewModel',
+      'esri/layers/GraphicsLayer'], config.options)
+      const view = this.$store.state._defaultMapView
       console.log(view);
-      console.log(polylineSymbol);
-      console.log(polygonSymbol);
-
-      // let sketch = new SketchViewModel({
-      //   view: view,
-      //   polylineSymbol,
-      //   polygonSymbol,
-      //   layer: sketchLayer
-      // });
-
-      // console.log(sketch);
-
-      // sketchVM.create("polyline")
-
-      // sketchVM.on("create", (e) => {
-      //   if (e.state === 'complete') {
-      //     geometryService.distance(url, {
-      //       distanceUnit: 'meters',
-      //       geometry1: e.graphic.geometry
-      //     }).then((distance) => {
-      //       console.log(distance);
-      //     })
-      //   }
-      // })
-      
+      const legend = new Legend({
+        view,
+      })
+      console.log(this.$store.state.a);
+      view.ui.add(legend, 'top-left')
+      const sketchLayer = new GraphicsLayer()
+      view.map.add(sketchLayer)
+      const sketch = new SketchViewModel({
+        view,
+        layer: sketchLayer
+      })
+      console.log(sketch);
+      sketch.create('polyline')
     }
   }
 }
 </script>
 
 <style>
-  .measure-menu {
+  .measureDiv {
     position: absolute;
     left: 80px;
-    top: 100px
+    top: 100px;
   }
 
   .el-dropdown-link {
@@ -100,4 +63,5 @@ export default {
   .el-icon-arrow-down {
     font-size: 12px;
   }
+
 </style>

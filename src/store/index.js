@@ -1,23 +1,35 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
+
+const state = {
+    _defaultMapView: 'aa',       //默认地图view
+    a: 4
+
+};
+
+const getters = {
+    _getDefaultMapView() {
+        return state._defaultMapView;
+    },
+
+};
+
+const mutations = {
+    _setDefaultMapView(state, value) {
+        state._defaultMapView = value;
+    },
+    setA(state, value) {
+      state.a = value
+    }
+
+};
 
 const store = new Vuex.Store({
-  state: {
-    defaultView: ''
-  },
-  getters: {
-  },
-  mutations: {
-    setMapView(state, payload) {
-      state.defaultView = payload.view
-    }
-  },
-  actions: {
-  },
-  modules: {
-  }
-})
+    state,
+    getters,
+    mutations
+});
 
-export default store
+export default store;

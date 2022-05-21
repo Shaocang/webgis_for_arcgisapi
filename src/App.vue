@@ -1,21 +1,20 @@
 <template>
   <div id="app">
     <page-layout/>
-    <measure-menu/>
   </div>
 </template>
 
 <script>
 import PageLayout from 'components/PageLayout.vue'
-import MeasureMenu from 'components/MeasureMenu.vue'
+
 
 export default {
   name: 'App',
   components: {
     PageLayout,
-    MeasureMenu,
   }
 }
+
 </script>
 
 <style>

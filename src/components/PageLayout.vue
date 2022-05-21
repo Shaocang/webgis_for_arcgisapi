@@ -18,7 +18,9 @@
           </el-menu>
         </el-aside>
         <el-main>
-          <map-view/>
+          <map-view-2/>
+          <map-tool/>
+          <measure-menu/>
         </el-main>
       </el-container>
     </el-container>
@@ -26,13 +28,17 @@
 </template>
 
 <script>
-import MapView from 'views/MapView.vue'
+import MapView2 from 'views/MapView2.vue'
+import MapTool from './MapTool.vue'
+import MeasureMenu from './MeasureMenu.vue'
 
 
 export default {
   name: 'PageLayout',
   components: {
-    MapView
+    MapTool,
+    MapView2,
+    MeasureMenu
   }
 }
 </script>
