@@ -3,21 +3,21 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+
 const store = new Vuex.Store({
   state: {
-    defaultView: ''
+    _defaultMapView: ''
   },
   getters: {
-  },
-  mutations: {
-    setMapView(state, payload) {
-      state.defaultView = payload.view
+    _getDefaultMapView(state) {
+      return state._defaultMapView
     }
   },
-  actions: {
+  mutations: {
+    _setMapView(state, payload) {
+      state._defaultMapView = payload.view
+    }
   },
-  modules: {
-  }
 })
 
 export default store
