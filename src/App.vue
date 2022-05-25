@@ -1,19 +1,17 @@
 <template>
   <div id="app">
     <page-layout/>
-    <measure-menu/>
   </div>
 </template>
 
 <script>
-import PageLayout from 'components/PageLayout.vue'
-import MeasureMenu from 'components/MeasureMenu.vue'
+import PageLayout from 'components/common/PageLayout.vue'
+
 
 export default {
   name: 'App',
   components: {
     PageLayout,
-    MeasureMenu,
   }
 }
 </script>

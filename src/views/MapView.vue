@@ -3,25 +3,28 @@
     <div id="mapDiv"></div>
     <basemap-toggle/>
     <menu-bar/>
+    <add-layer/>
+    <measure-menu/>
   </div>
 </template>
 
 <script>
 import {loadModules} from 'esri-loader'
-import BasemapToggle from 'components/mapwidgets/BasemapToggle.vue'
-import MenuBar from 'components/MenuBar.vue'
+import options from 'components/config'
 
+import BasemapToggle from 'components/onemap/BasemapToggle.vue'
+import MenuBar from 'components/onemap/MenuBar.vue'
+import AddLayer from 'components/onemap/AddLayer.vue'
+import MeasureMenu from 'components/onemap/MeasureMenu.vue'
 
-const options = {
-  version: '4.23',
-  css: true
-}
 
 export default {
   name: "MapView",
   components: { 
     BasemapToggle,
-    MenuBar 
+    MenuBar,
+    AddLayer,
+    MeasureMenu 
   },
   mounted: function() {
     this._createMapView()
@@ -54,10 +57,13 @@ export default {
         zoom: 10
       })
       view.ui.components = []
+
       this.$store.commit({
-        type: 'setMapView',
-        view,
+        type: '_setMapView',
+        view
       })
+
+      
     }
   }
 }
