@@ -127,13 +127,22 @@ export default {
     // 删除图层
     _removeFeatureLayer(id) {
       const _self = this
+      const map = _self._currentMapView.map
       if (_self._currentMapView) {
         const idStr = id.toString()
-        const layer = _self._currentMapView.map.findLayerById(idStr)
-        _self._currentMapView.map.remove(layer)
+        const layer = map.findLayerById(idStr)
+        map.remove(layer)
+      }
+      // 如果进行了空间查询 再去除火车站点图层时 也去除查询结果
+      if (id === 3) {
+        if (map.findLayerById('resultlayer')) {
+            map.remove(map.findLayerById('resultlayer'))
+          }
+          if (map.findLayerById('sketchQueryLayer')) {
+            map.remove(map.findLayerById('sketchQueryLayer'))
+          }
       }
     }
-  
   }
 };
 </script>
