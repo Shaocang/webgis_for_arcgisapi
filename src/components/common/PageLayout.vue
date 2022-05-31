@@ -6,7 +6,7 @@
       </el-header>
       <el-container>
         <el-aside>
-          <el-menu :collapse=true>
+          <el-menu :collapse=true @select="handleSelect">
             <el-menu-item index="1">
               <i class="el-icon-monitor"></i>
               <span slot="title">WebGIS大屏</span>
@@ -18,7 +18,7 @@
           </el-menu>
         </el-aside>
         <el-main>
-          <map-view/>
+          <router-view/>
         </el-main>
       </el-container>
     </el-container>
@@ -26,13 +26,23 @@
 </template>
 
 <script>
-import MapView from 'views/MapView.vue'
 
 
 export default {
   name: 'PageLayout',
   components: {
-    MapView
+
+  },
+  methods: {
+    handleSelect(index) {
+      if (index === '1') {
+        this.$router.push('/homescreen')
+      } 
+      if (index === '2') {
+        console.log(11);
+        this.$router.push('/onemap')
+      }
+    }
   }
 }
 </script>

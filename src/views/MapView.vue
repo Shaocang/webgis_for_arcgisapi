@@ -3,8 +3,13 @@
     <div id="mapDiv"></div>
     <basemap-toggle/>
     <menu-bar/>
-    <add-layer/>
-    <measure-menu/>
+    <!-- <add-layer/> -->
+    <!-- <measure-menu/> -->
+    <spatial-query/>
+    <swipe-analyse/>
+    <attribute-query/>
+    <nav-menu/>
+    <!-- <measure-panel/> -->
   </div>
 </template>
 
@@ -14,8 +19,13 @@ import options from 'components/config'
 
 import BasemapToggle from 'components/onemap/BasemapToggle.vue'
 import MenuBar from 'components/onemap/MenuBar.vue'
-import AddLayer from 'components/onemap/AddLayer.vue'
-import MeasureMenu from 'components/onemap/MeasureMenu.vue'
+// import AddLayer from 'components/onemap/AddLayer.vue'
+// import MeasureMenu from 'components/onemap/MeasureMenu.vue'
+import SpatialQuery from 'components/onemap/SpatialQuery.vue'
+import SwipeAnalyse from 'components/onemap/SwipeAnalyse.vue'
+import AttributeQuery from 'components/onemap/AttributeQuery.vue'
+import NavMenu from 'components/onemap/NavMenu.vue'
+// import MeasurePanel from 'components/onemap/MeasurePanel.vue'
 
 
 export default {
@@ -23,8 +33,13 @@ export default {
   components: { 
     BasemapToggle,
     MenuBar,
-    AddLayer,
-    MeasureMenu 
+    // AddLayer,
+    // MeasureMenu,
+    SpatialQuery,
+    SwipeAnalyse,
+    AttributeQuery,
+    NavMenu,
+    // MeasurePanel 
   },
   mounted: function() {
     this._createMapView()

@@ -1,18 +1,18 @@
 <template>
-  <div class="measure-menu">
-    <el-dropdown @command="_handleCommand">
-      <span class="el-dropdown-link">
-        测量菜单<i class="el-icon-arrow-down el-icon--right"></i>
-      </span>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item command="a">距离测量</el-dropdown-item>
-        <el-dropdown-item command="b">面积测量</el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
-    <div class="result-panel">
-      <div class="result">
-        
-      </div>
+  <div class="measure-panel">
+    <div class="panel-header">
+      <span>距离测量</span>
+      <i class="el-icon-close"></i>
+    </div>
+    <div class="panel-main">
+      <el-select v-model="value" placeholder="请选择">
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-select>
     </div>
   </div>
 </template>
@@ -200,11 +200,11 @@ export default {
 </script>
 
 <style>
-  .measure-menu {
+  /* .measure-menu {
     position: absolute;
     left: 80px;
     top: 500px
-  }
+  } */
 
   .el-dropdown-link {
     cursor: pointer;
