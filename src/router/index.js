@@ -27,10 +27,10 @@ const routes = [
     component: () => import('views/HomeScreen.vue')
   },
   {
-    path: '/multiscreen',
+    path: '/onemap/multiscreen',
     name: 'multiscreen',
     component: () => import('views/MultiScreen.vue')
-  }
+  },
 ]
 
 const router = new VueRouter({

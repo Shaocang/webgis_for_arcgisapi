@@ -2,14 +2,9 @@
   <div class="mapView">
     <div id="mapDiv"></div>
     <basemap-toggle/>
-    <menu-bar/>
-    <!-- <add-layer/> -->
-    <!-- <measure-menu/> -->
-    <spatial-query/>
-    <swipe-analyse/>
-    <attribute-query/>
+    <add-layer/>
     <nav-menu/>
-    <!-- <measure-panel/> -->
+    <attribute-query/>
   </div>
 </template>
 
@@ -18,28 +13,18 @@ import {loadModules} from 'esri-loader'
 import options from 'components/config'
 
 import BasemapToggle from 'components/onemap/BasemapToggle.vue'
-import MenuBar from 'components/onemap/MenuBar.vue'
-// import AddLayer from 'components/onemap/AddLayer.vue'
-// import MeasureMenu from 'components/onemap/MeasureMenu.vue'
-import SpatialQuery from 'components/onemap/SpatialQuery.vue'
-import SwipeAnalyse from 'components/onemap/SwipeAnalyse.vue'
+import AddLayer from 'components/onemap/AddLayer.vue'
 import AttributeQuery from 'components/onemap/AttributeQuery.vue'
 import NavMenu from 'components/onemap/NavMenu.vue'
-// import MeasurePanel from 'components/onemap/MeasurePanel.vue'
 
 
 export default {
   name: "MapView",
   components: { 
     BasemapToggle,
-    MenuBar,
-    // AddLayer,
-    // MeasureMenu,
-    SpatialQuery,
-    SwipeAnalyse,
+    AddLayer,
     AttributeQuery,
-    NavMenu,
-    // MeasurePanel 
+    NavMenu 
   },
   mounted: function() {
     this._createMapView()

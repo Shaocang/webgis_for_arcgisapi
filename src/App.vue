@@ -7,7 +7,6 @@
 <script>
 import PageLayout from 'components/common/PageLayout.vue'
 
-
 export default {
   name: 'App',
   components: {

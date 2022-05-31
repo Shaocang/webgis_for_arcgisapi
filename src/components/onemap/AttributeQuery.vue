@@ -1,5 +1,5 @@
 <template>
-  <div class="attribute-query">
+  <div class="attribute-query" v-show="isShow">
     <el-autocomplete
       popper-class="my-autocomplete"
       v-model="state"
@@ -12,20 +12,31 @@
       </i>
       <template slot-scope="{ item }">
         <div class="name">{{ item.value }}</div>
-        <span class="addr">{{ item.address }}</span>
       </template>
     </el-autocomplete>
-    <button @click="_loadAll">加载数据</button>
   </div>
 </template>
 
 <script>
+import eventBus from 'assets/eventBus'
+
 export default {
   name: 'AttributeQuery',
+  mounted() {
+    const _self = this
+    eventBus.$on('attributeQueryEvent', (isClick) => {
+      if (isClick) {
+        _self._loadAll(isClick)
+      } else {
+        _self.isShow = isClick
+      }
+    })
+  },
   data() {
     return {
       provinces: [],
-      state: ''
+      state: '',
+      isShow: false
     };
   },
   computed: {
@@ -45,24 +56,30 @@ export default {
         return (province.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
       };
     },
-    _loadAll() {
+    _loadAll(isClick) {
       const _self = this
       const map = _self._currentMapView.map
       const provinceLayer = map.layers.filter(layer => layer.id === '5').getItemAt(0)
+      if (!provinceLayer) {
+        _self.$message({
+          message: '请添加省级图层',
+          type: 'warning'
+        })
+        return
+      } 
       const query = provinceLayer.createQuery()
       query.outFields = '*'
       provinceLayer.queryFeatures(query)
         .then((featureset) => {
-          console.log(featureset.features);
           featureset.features.forEach((feature) => {
-            console.log(feature.attributes['省区']);
             this.provinces.push({'value': feature.attributes['省区']})
           })
         })
+        _self.isShow = isClick
     },
-    handleSelect(item) {
-      console.log(item.value);
-    },
+    handleSelect(select) {
+      console.log(select.value);
+    }
   },
 }
 </script>
@@ -71,7 +88,7 @@ export default {
   .attribute-query {
     position: absolute;
     top: 300px;
-    right: 200px;
+    left: 80px;
   }
 
   .my-autocomplete li {
