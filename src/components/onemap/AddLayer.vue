@@ -1,9 +1,10 @@
 <template>
-  <div class="catelog-tree">
+  <div class="catelog-tree" v-show="isShow">
     <el-tree
       :data="data"
       show-checkbox
       node-key="id"
+      ref="tree"
       :default-expanded-keys="[2, 3]"
       :props="defaultProps"
       @check-change="_handleCheckChange">
@@ -14,10 +15,23 @@
 <script>
 import {loadModules} from 'esri-loader'
 import options from 'components/config'
-
+import eventBus from 'assets/eventBus'
 
 export default {
   name: 'AddLayer',
+  mounted() {
+    const _self = this
+    eventBus.$on('addLayerEvent', (isClick) => {
+      if (!isClick) {
+        // 清屏
+        if (_self.getCheckedKeys().length > 0) {
+          _self.resetChecked()
+        }
+        
+      }
+      _self.isShow = isClick
+    })
+  },
   data() {
     return {
       data: [{
@@ -74,7 +88,8 @@ export default {
           portalId: '73bbbf88690a481e953f05a9b1a8a1a7',
           title: '县级行政区'
         },
-      ]
+      ],
+      isShow: false
     };
   },
   computed: {
@@ -90,6 +105,12 @@ export default {
     }
   },
   methods: {
+    getCheckedKeys() {
+        return this.$refs.tree.getCheckedKeys();
+      },
+    resetChecked() {
+        this.$refs.tree.setCheckedKeys([]);
+    },
     // 是否选中
     _handleCheckChange(node, isChecked) {
       const _self = this
@@ -151,7 +172,7 @@ export default {
   .catelog-tree {
     position: absolute;
     left: 80px;
-    top: 100px;
+    top: 80px;
   }
 
   .el-tree {
@@ -166,10 +187,10 @@ export default {
   }
 
   .el-tree-node__content:hover {
-    background-color: coral !important;
+    background-color: #909399 !important;
   }
 
   .el-tree-node:focus > .el-tree-node__content {
-    background-color: coral !important;
+    background-color: #909399 !important;
   }
 </style>
